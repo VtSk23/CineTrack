@@ -1,0 +1,28 @@
+Requisitos
+
+1 Campos do filme:
+
+-Título
+-Ano
+-Gênero
+-Pôster
+-Status
+-Nota
+-Comentário
+
+2 Interface
+
+-Busca por título
+-Filtros de Status
+-Lista de filmes
+-Formulário de cadastro
+
+3 Operações
+
+Ação	|	Método	|	Rota
+------------------------------------
+Listar		GET		/filmes
+Buscar 		GET 		/filmes/:id
+Cadastrar 	POST 		/filmes
+Editar 		PUT 		/filmes/:id
+Remover 	DELETE 		/filmes/:id
