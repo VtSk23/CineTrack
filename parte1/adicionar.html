@@ -10,32 +10,33 @@
     <a href="index.html">← Voltar</a>
     <h1>Adicionar filme</h1>
     <form id="form-filme">
-        <p><label for="titulo">Título</label></p>
+        <label for="titulo">Título</label>
         <input id="titulo" name="titulo" type="text" required>
-
-        <p><label for="ano">Ano</label></p>
+        
+        <label for="ano">Ano</label>
         <input id="ano" name="ano" type="number"
                 min="1888" max="2030" required>
-
-        <p><label for="genero">Gênero</label></p>
+        
+        <label for="genero">Gênero</label>
         <input id="genero" name="genero" type="text" required>
 
-        <p><label for="URLposter">URL do pôster</label></p>
+        <label for="URLposter">URL do pôster</label>
         <input id="URLposter" name="URLposter" type="url">
 
-        <p><label for="status">Status</label></p>
+        <label for="status">Status</label>
         <select name="status" id="status" required>
-            <option value="queroAssistir">Quero Assistir</option>
-            <option value="assistidos">Assistidos</option>
             <option value="todos">Todos</option>
+            <option value="assistido">Assistido</option>
+            <option value="assistindo">Assistindo</option>
+            <option value="queroAssistir">Quero Assistir</option>
         </select>
 
-        <p><label for="nota">Nota (1 a 5)</label></p>
+        <label for="nota">Nota (1 a 5)</label>
         <input id="nota" name="nota" type="number"
                 min="1" max="5">
                 
-        <p><label for="comentario">Comentário</label></p>
-        <p><textarea id="comentario" name="comentario"></textarea></p>
+        <label for="comentario">Comentário</label>
+        <textarea id="comentario" name="comentario"></textarea>
 
         <button type="button">Cancelar</button>
         <button type="submit">Salvar</button>
