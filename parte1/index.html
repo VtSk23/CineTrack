@@ -6,32 +6,73 @@
     <title>CineTrack</title>
 </head>
 <body>
-    <h1>CineTrack</h1>
-    <p><strong>Cinetrack</strong> é seu gerenciador pessoal de filmes: registre o que já viu, o que está vendo e o que quer ver.</p>
-    <!---->
-    <h2>Status possíveis</h2>
-    <ul id="lista-status">
-        <li class="item-status">Assistido</li>
-        <li class="item-status">Assistindo</li>
-        <li class="item-status">Quero assistir</li>
-    </ul>
-    <!---->
-    <h2>Meus filmes favoritos</h2>
-    <ol>
-        <li>A origem</li>
-        <li>Interestelar</li>
-        <li>Parasita</li>
-    </ol>
-    <!---->
-    <h2>Sobre a origem</h2>
-    <dl>
-        <dt>Diretor</dt> <dd>chistopher nolan</dd>
-        <dt>Ano</dt> <dd>2010</dd>
-        <dt>Gênero</dt> <dd>Ficção cientifica</dd>
-    </dl>
-    <!---->
-    <p>&copy; 2025 CineTrack</p>
-    <!---->
-    <a href="adicionar.html">+ Adicionar filme</a>
+    <header>
+        <h1>CineTrack</h1>
+        <input type="search" aria-label="Buscar Filme">
+        <button type="submit">+ Adicionar</button>
+    </header>
+
+    <nav aria-label="Filtros de Status">
+        <button class="ativo">Todos</button>
+        <button class="ativo">Assistido</button>
+        <button class="ativo">Assistindo</button>
+        <button class="ativo">Quero assistir</button>
+    </nav>
+
+    <main>
+        <section id="lista" aria-live="polite">
+            <h2 class="sr-only">Lista de Filmes</h2>
+            <article class="card">
+                <img src="/img/origem.jpg" alt="Poster">
+                <h2>A Origem</h2>
+                <p>2010 · Ficção Científica</p> 
+                <p>Nota: ★★★★★</p> 
+                <span>assistido <button>Editar</button> <button>Remover</button></span>
+            </article>
+
+            <article class="card">
+                <img src="/img/parasita.jpg" alt="Poster">
+                <h2>Parasita</h2>
+                <p>2019 · Suspense</p>
+                <p>Nota: ★★★★☆</p>
+                <span>assistido <button>Editar</button> <button>Remover</button></span>      
+            </article>
+
+            <article class="card">
+                <img src="/img/auto.jpg" alt="Poster">
+                <h2>O Auto da Compadecida</h2>
+                <p>2000 · Cómedia</p>
+                <p>Nota: ★★★★★</p> 
+                <span>assistido <button>Editar</button> <button>Remover</button></span>
+            </article>
+
+            <article class="card">
+                <img src="/img/duna.jpg" alt="Poster">
+                <h2>Duna: Parte Dois</h2>
+                <p>2024 · Ficção Científica</p>
+                <p>Nota: ★★★★☆</p>
+                <span>assistido <button>Editar</button> <button>Remover</button></span>
+            </article>
+
+            <article class="card">
+                <img src="/img/interestelar.jpg" alt="Poster">
+                <h2>interestelar</h2>
+                <p>2014 · Ficção Científica</p>
+                <p>Nota: ★★★★★</p>
+                <span>assistido <button>Editar</button> <button>Remover</button></span>
+            </article>
+
+            <article class="card">
+                <img src="/img/cidadedeDeus.jpg" alt="Poster">
+                <h2>Cidade de Deus</h2>
+                <p>2002 · Drama</p>
+                <p>Nota: ★★★★☆</p>
+                <span>assistido <button>Editar</button> <button>Remover</button></span>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <a href="adicionar.html">Adiiconar Filme</a>
+    </footer>
 </body> 
 </html>
