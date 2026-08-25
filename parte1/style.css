@@ -1,0 +1,161 @@
+/*
+primaria= #731963
+acento= #ffffff
+neutro= #1c1b1f
+*/
+
+* {
+  box-sizing: border-box;;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+html {
+  font-size: 16px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button {
+  background-color: #ffffff;
+  color: #50255a;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 1000;
+  width: 100px;
+  height: 40px;
+}
+
+input {
+  height: 36px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #ffffff;
+  background: linear-gradient(#484646,#1c1b1f);
+
+  & header {
+    padding: 14px;
+
+
+    & button {
+      border-radius: 10px;
+    }
+  }
+
+  & nav {
+    padding: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  & main {
+    display: flex;
+    flex-direction: column;
+
+    & .sr-only {
+      color: #FFFDFD;
+      padding: 16px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 800;
+      word-spacing: 4px;
+      letter-spacing: 2px;
+    }
+
+    & section {
+      display: flex;
+      flex-direction: row;
+      padding: 10px;
+      gap: 18px;
+
+      & article {
+        background: linear-gradient(#731963, #2f223d); 
+        border-radius: 10px;
+        padding: 8px;
+        width: 220px;
+        border: 1px solid #dddddd53;
+        box-shadow: 0 1px 4px #0002;
+        
+        & .card {
+          display: flex;
+          flex-direction: row;
+          padding: 16px;
+          border-radius: 10px;
+          top: 10px;
+          bottom: 10px;
+          
+        }
+
+        & h2{
+          text-align: center;
+          margin-top: 8px;
+          margin-bottom: 8px;
+
+        }
+
+        & img{
+          margin-top: 6px;
+        }
+
+        & p {
+          color: #b9b0b0;
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+
+        & span {
+          display: flex;
+          flex-direction: row;
+          margin-top: 10px;
+          gap: 4px;
+          text-align: center;
+          font-weight: bold;
+          padding: 10px;
+          font-size: 15px;
+        }
+
+        & button {
+          width: 70px;
+          height: 34px;
+          background-color: #ffffff;
+          font-size: 11px;
+        }
+      }
+    }
+  }
+
+  & footer {
+    align-items: center;
+
+    & a {
+      background-color: #ffffff;
+      color: #50255a;
+      text-align: center;
+      font-weight: 800;
+      text-decoration-line: none;
+      border-radius: 20px;
+      margin-left: 50%;
+      margin-right: 50%;
+      display: flex;
+      flex-direction: column;
+      width: 150px;
+      padding: 10px;
+    }
+  }
+}
+
