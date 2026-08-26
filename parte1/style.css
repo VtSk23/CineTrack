@@ -1,7 +1,7 @@
 /*
-primaria= #731963
-acento= #ffffff
-neutro= #1c1b1f
+primaria= #50255A
+acento= #2fc01c
+neutro= #E5E8E7
 */
 
 * {
@@ -23,7 +23,7 @@ img {
 }
 
 button {
-  background-color: #ffffff;
+  background-color: #b3b9b7;
   color: #50255a;
   font: inherit;
   font-size: 14px;
@@ -44,15 +44,17 @@ input {
 body {
   font-family: system-ui, sans-serif;
   line-height: 1.5;
-  color: #ffffff;
-  background: linear-gradient(#484646,#1c1b1f);
+  color: #000000;
+  background-color: #E5E8E7;
 
   & header {
     padding: 14px;
-
+    background-color: #50255A;
 
     & button {
       border-radius: 10px;
+      color: #ffffff;
+      background-color: #2fc01c;
     }
   }
 
@@ -67,7 +69,7 @@ body {
     flex-direction: column;
 
     & .sr-only {
-      color: #FFFDFD;
+      color: #000000;
       padding: 16px;
       text-align: center;
       font-size: 30px;
@@ -78,7 +80,7 @@ body {
 
     & section {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       padding: 10px;
       gap: 18px;
 
@@ -97,7 +99,6 @@ body {
           border-radius: 10px;
           top: 10px;
           bottom: 10px;
-          
         }
 
         & h2{
@@ -141,20 +142,24 @@ body {
 
   & footer {
     align-items: center;
+    
+    & small {
+      color: #000000;
+    }
 
     & a {
-      background-color: #ffffff;
-      color: #50255a;
+      color: #2fc01c;
       text-align: center;
+      font-size: 18px;
       font-weight: 800;
       text-decoration-line: none;
       border-radius: 20px;
       margin-left: 50%;
       margin-right: 50%;
       display: flex;
-      flex-direction: column;
-      width: 150px;
-      padding: 10px;
+      flex-direction: row;
+      width: 200px;
+      padding: 18px;
     }
   }
 }
