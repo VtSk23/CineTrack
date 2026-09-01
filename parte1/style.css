@@ -1,7 +1,7 @@
 /*
 primaria= #50255A
 acento= #2fc01c
-neutro= #E5E8E7
+neutro= white
 */
 
 * {
@@ -18,7 +18,7 @@ html {
 img {
   max-width: 100%;
   display: block;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -30,12 +30,13 @@ button {
   cursor: pointer;
   border-radius: 20px;
   cursor: pointer;
-  font-weight: 1000;
+  font-weight: 600;
   width: 100px;
   height: 40px;
 }
 
 input {
+  background-color: #d6d6d6;
   height: 36px;
   border-radius: 10px;
   font-size: 18px;
@@ -45,28 +46,56 @@ body {
   font-family: system-ui, sans-serif;
   line-height: 1.5;
   color: #000000;
-  background-color: #E5E8E7;
+  background-color: white;
 
   & header {
     padding: 14px;
     background-color: #50255A;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    & h1{
+      flex: 0 0 auto;
+      color: white;
+    }
+
+    & input {
+      flex: 1 1 240px;
+    }
 
     & button {
       border-radius: 10px;
-      color: #ffffff;
+      color: white;
       background-color: #2fc01c;
     }
   }
 
   & nav {
-    padding: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 12px 24px;
+    gap: 8px;
     margin-top: 20px;
     margin-bottom: 20px;
+
+    & button{
+      color: #731963;
+      padding: 6px 14px;
+      background: #E5E8E7;
+      width: auto;
+      border: 1px solid #731963;
+
+      &.ativo{
+        background: #731963;
+        color: white;
+      }
+    }
   }
 
   & main {
-    display: flex;
-    flex-direction: column;
 
     & .sr-only {
       color: #000000;
@@ -75,67 +104,78 @@ body {
       font-size: 30px;
       font-weight: 800;
       word-spacing: 4px;
-      letter-spacing: 2px;
     }
 
-    & section {
+    & #lista{
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 16px;
+   
+      padding: 16px 24px;
+    }
+
+    section {
       padding: 10px;
       gap: 18px;
 
-      & article {
+      article {
         background: linear-gradient(#731963, #2f223d); 
-        border-radius: 10px;
+        color: white;
+        border-radius: 8px;
         padding: 8px;
         width: 220px;
         border: 1px solid #dddddd53;
         box-shadow: 0 1px 4px #0002;
-        
-        & .card {
+      
+        &.card {
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
+          gap: 6px;
           padding: 16px;
           border-radius: 10px;
           top: 10px;
           bottom: 10px;
-        }
 
-        & h2{
+          .acoes{
+            margin-top: auto;
+            display: flex; 
+            gap: 8px;
+            align-self: center;
+          }
+
+          h2{
           text-align: center;
           margin-top: 8px;
           margin-bottom: 8px;
 
-        }
+          }
 
-        & img{
-          margin-top: 6px;
-        }
+          img{
+            margin-top: 6px;
+          }
 
-        & p {
-          color: #b9b0b0;
-          font-size: 14px;
-          font-weight: 600;
-          margin-bottom: 8px;
-        }
+          p {
+            color: #b9b0b0;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+          }
 
-        & span {
-          display: flex;
-          flex-direction: row;
-          margin-top: 10px;
-          gap: 4px;
-          text-align: center;
-          font-weight: bold;
-          padding: 10px;
-          font-size: 15px;
-        }
+          span {
+            margin-top: 2px;
+            gap: 4px; 
+            padding: 10px;
+            font-size: 15px;
+          }
 
-        & button {
-          width: 70px;
-          height: 34px;
-          background-color: #ffffff;
-          font-size: 11px;
+          button {
+            width: 70px;
+            height: 34px;
+            background-color: white;
+            font-size: 11px;
+          }
         }
+        
       }
     }
   }
@@ -151,7 +191,7 @@ body {
       color: #2fc01c;
       text-align: center;
       font-size: 18px;
-      font-weight: 800;
+      font-weight: 700;
       text-decoration-line: none;
       border-radius: 20px;
       margin-left: 50%;
@@ -163,4 +203,3 @@ body {
     }
   }
 }
-
