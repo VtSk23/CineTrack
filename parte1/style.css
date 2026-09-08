@@ -5,7 +5,7 @@ neutro= white
 */
 
 * {
-  box-sizing: border-box;;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   border: none;
@@ -48,7 +48,7 @@ body {
   color: #000000;
   background-color: white;
 
-  & header {
+  header {
     padding: 14px;
     background-color: #50255A;
     display: flex;
@@ -57,19 +57,40 @@ body {
     gap: 16px;
     flex-wrap: wrap;
 
-    & h1{
+    h1{
       flex: 0 0 auto;
       color: white;
+      font-size: clamp(1.2rem,
+                      1rem + 2.5vw,
+                      2.5rem);
     }
 
-    & input {
+    input {
       flex: 1 1 240px;
     }
 
-    & button {
+    button {
       border-radius: 10px;
       color: white;
       background-color: #2fc01c;
+
+      .txtcurto{
+        display: inline;
+      }
+
+      .txtlongo{
+        display: none;
+      }
+
+      @media(min-width: 1024px) {
+        .txtcurto{
+          display: none;
+        }
+
+        .txtlongo{
+          display: inline;
+        }
+      }
     }
   }
 
@@ -80,6 +101,7 @@ body {
     gap: 8px;
     margin-top: 20px;
     margin-bottom: 20px;
+    
 
     & button{
       color: #731963;
@@ -87,6 +109,7 @@ body {
       background: #E5E8E7;
       width: auto;
       border: 1px solid #731963;
+      font-size: clamp(0.2rem, 1rem + 1vw, 1rem);
 
       &.ativo{
         background: #731963;
@@ -95,90 +118,94 @@ body {
     }
   }
 
-  & main {
+  main {
 
-    & .sr-only {
-      color: #000000;
+  .sr-only {
+    color: #000000;
+    padding: 16px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    word-spacing: 4px;
+  }
+
+  
+  #lista {
+    display: grid;
+    grid: repeat(auto-fill,minmax(200px, 1fr));
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px 24px;
+
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    
+    article.card {
+      background: linear-gradient(#731963, #2f223d); 
+      color: white;
+      border-radius: 10px;
       padding: 16px;
-      text-align: center;
-      font-size: 30px;
-      font-weight: 800;
-      word-spacing: 4px;
-    }
+      border: 1px solid #dddddd53;
+      box-shadow: 0 1px 4px #0002;
 
-    & #lista{
       display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-   
-      padding: 16px 24px;
-    }
+      flex-direction: column;
+      gap: 6px;
 
-    section {
-      padding: 10px;
-      gap: 18px;
-
-      article {
-        background: linear-gradient(#731963, #2f223d); 
-        color: white;
+      img {
+        margin-top: 6px;
+        width: 100%;
+        aspect-ratio: 2/3; 
+        object-fit: cover;
         border-radius: 8px;
-        padding: 8px;
-        width: 220px;
-        border: 1px solid #dddddd53;
-        box-shadow: 0 1px 4px #0002;
-      
-        &.card {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          padding: 16px;
-          border-radius: 10px;
-          top: 10px;
-          bottom: 10px;
+      }
 
-          .acoes{
-            margin-top: auto;
-            display: flex; 
-            gap: 8px;
-            align-self: center;
-          }
+      h2 {
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
 
-          h2{
-          text-align: center;
-          margin-top: 8px;
-          margin-bottom: 8px;
+      p {
+        color: #b9b0b0;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
 
-          }
+      span {
+        margin-top: 2px;
+        gap: 4px; 
+        padding: 10px;
+        font-size: 15px;
+      }
 
-          img{
-            margin-top: 6px;
-          }
+      .acoes {
+        margin-top: auto; 
+        display: flex; 
+        gap: 8px;
+        align-self: center;
 
-          p {
-            color: #b9b0b0;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-          }
-
-          span {
-            margin-top: 2px;
-            gap: 4px; 
-            padding: 10px;
-            font-size: 15px;
-          }
-
-          button {
-            width: 70px;
-            height: 34px;
-            background-color: white;
-            font-size: 11px;
-          }
+        button {
+          width: 70px;
+          height: 34px;
+          background-color: white;
+          font-size: 11px;
+          border-radius: 6px;
+          color: #50255a;
         }
-        
       }
     }
   }
+}
 
   & footer {
     align-items: center;
@@ -203,3 +230,6 @@ body {
     }
   }
 }
+
+
+
