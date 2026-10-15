@@ -37,11 +37,15 @@ const filmesIniciais = [
     nota: 4, status: "quero", comentario: "" },
 ];
 
+let filmes = [...filmesIniciais]
+
 const TOTAL = filmesIniciais.length;
 const footerSmall = document.querySelector("footer small");
 if (footerSmall) {
   footerSmall.textContent = `CineTrack © 2026 • ${TOTAL} filmes cadastrados`;
 }
+
+const lista = document.querySelector("#lista");
 
 function renderizarCards(filmes) {
     const cards = filmes.map((f) => {
@@ -65,6 +69,26 @@ function renderizarCards(filmes) {
     lista.innerHTML = cards;
 }
 
-const lista = document.querySelector("#lista");
+lista.addEventListener("click", (e) => {
+  const botao = e.target.closest(".btn-remover");
+  if (!botao) return;
+  if (!confirm("Remover este filme?")) return;
+  const card = botao.closest(".card");
+  const id = Number(card.dataset.id);
+  filmes = filmes.filter((f) => f.id !== id);
+  renderizarCards(filmes);
+});
 
-renderizarCards(filmesIniciais);
+const nav = document.querySelector("nav");
+
+nav.addEventListener("click", (e) => {
+  const botao = e.target.closest("button");
+  if (!botao) return;
+  nav.querySelector(".ativo").classList.remove("ativo");
+  botao.classList.add("ativo");
+  const status = botao.dataset.status;
+  renderizarCards(filmes.filter((f) =>
+    status === "todos" || f.status === status));
+});
+
+renderizarCards(filmes);
