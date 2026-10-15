@@ -296,7 +296,7 @@ body {
 
 .badge-assistido,
 .badge-assistindo,
-.badge-queroAssistir {
+.badge-quero {
   display: inline-block;
   padding: 4px 12px;
   border-radius: 30px;
@@ -307,7 +307,7 @@ body {
 
 .badge-assistido {
   background-color: #23bf0fcc;
-  color: #ffffff;
+  color: #000000;
 }
 
 .badge-assistindo {
@@ -315,7 +315,7 @@ body {
   color: #000000;
 }
 
-.badge-queroAssistir {
+.badge-quero {
   background-color: #0970ac;
   color: #ffffff;
 }
