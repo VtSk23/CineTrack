@@ -103,11 +103,7 @@ body {
     button {
       border-radius: 10px;
       background-color: #2fc01c;
-
-      a {
-        text-decoration-line: none;
-        color: white;
-      }
+      color: white;
 
       .txtcurto {
         display: inline;
@@ -307,12 +303,12 @@ body {
 
 .badge-assistido {
   background-color: #23bf0fcc;
-  color: #000000;
+  color: #ffffff;
 }
 
 .badge-assistindo {
   background-color: #cbdc0bcf;
-  color: #000000;
+  color: #ffffff;
 }
 
 .badge-quero {
