@@ -9,11 +9,10 @@
   <body>
     <header>
       <h1>CineTrack</h1>
-      <input type="search" aria-label="Buscar Filme" />
+      <input type="search" placeholder="Buscar filme" id="busca" name="busca" aria-label="Buscar Filme" />
       <button type="submit">
           <span class="txtcurto">+</span>
           <span class="txtlongo">+ Adicionar</span>
-        </a>
       </button>
 
       <div id="modal" hidden>
@@ -44,10 +43,9 @@
               <p>
                   <label for="status">Status</label><br>
                   <select name="status" id="status" required>
-                      <option value="todos">Todos</option>
                       <option value="assistido">Assistido</option>
                       <option value="assistindo">Assistindo</option>
-                      <option value="queroAssistir">Quero Assistir</option>
+                      <option value="quero">Quero Assistir</option>
                   </select>
               </p>
               
@@ -62,10 +60,10 @@
                   <textarea id="comentario" name="comentario"></textarea>
               </p>
               
-              <p>
-                  <button type="button" id="btn-cancelar">Cancelar</button>
-                  <button type="submit">Salvar</button>
-              </p>
+              <div class="acoes-modal">
+                  <button type="button" id="btn-cancelar" name="btn-cancelar">Cancelar</button>
+                  <button type="submit" id="btn-salvar" name="btn-salvar">Salvar</button>
+              </div>
           </form>
         </div>
       </div>

@@ -16,9 +16,10 @@ html {
 
 :root {
   color-scheme: light;
-  --cor-fundo: white;
+  --cor-fundo: #d1d1d1;
   --cor-texto: #000000;
   --cor-botao: #50255a;
+  --campo-borda: #080808;
   --raio: 20px; 
   --espaco: 16px;
 }
@@ -28,6 +29,13 @@ html {
     color-scheme: dark;
     --cor-fundo: #1a1a1a;
     --cor-texto: #f3f3f3;
+    --campo-borda: #6b6b6b;
+  }
+
+  #modal select,
+  #modal select option {
+    background-color: #3a3a3a;
+    color: #f3f3f3;
   }
 }
 
@@ -68,7 +76,8 @@ button {
 }
 
 input {
-  background-color: #d6d6d6;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
   height: 36px;
   border-radius: 10px;
   font-size: 18px;
@@ -98,6 +107,7 @@ body {
 
     input {
       flex: 1 1 240px;
+      padding: 10px;
     }
 
     button {
@@ -186,7 +196,7 @@ body {
         gap: 6px;
 
        
-        &.com-faixa::before {
+        &::before {
           content: "";
           position: absolute;
           top: 0;
@@ -211,7 +221,7 @@ body {
         }
 
         p {
-          color: #b9b0b0;
+          color: #bdb2b2;
           font-size: 14px;
           font-weight: 600;
           margin-bottom: 8px;
@@ -231,12 +241,14 @@ body {
           align-self: center;
 
           button {
-            width: 70px;
-            height: 34px;
+            width: 140px;
+            height: 40px;
             background-color: white;
-            font-size: 11px;
+            font-size: 16px;
+            font-weight: 700;
             border-radius: 6px;
             color: #50255a;
+            margin-bottom: 8px;
           }
         }
       }
@@ -263,12 +275,37 @@ body {
   justify-content: center;
   z-index: 50;
 
+  input,
+  select,
+  textarea {
+    width: 100%;
+    height: 36px;
+    padding: 6px 10px;
+    font: inherit;
+    font-size: 16px;
+    color: var(--campo-texto);
+    background-color: var(--campo-fundo);
+    border: 1px solid var(--campo-borda);
+    border-radius: 10px;
+  }
+
+  textarea {
+    height: auto;
+    min-height: 80px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
   &[hidden] { 
     display: none; 
   }
 
   .modal-conteudo {
     background: var(--cor-fundo);
+    font-weight: 700;
     padding: 24px;
     border-radius: 12px;
     width: 100%;
@@ -276,6 +313,18 @@ body {
     max-height: 90vh;
     overflow: auto; 
     animation: aparecer 200ms ease;
+  }
+
+  .acoes-modal {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  #btn-cancelar,
+  #btn-salvar {
+    background-color: var(--cor-botao);
   }
 }
 
@@ -295,23 +344,25 @@ body {
 .badge-quero {
   display: inline-block;
   padding: 4px 12px;
-  border-radius: 30px;
-  font-size: 10px;
+  border-radius: 6px;
+  font-size: 16px;
   text-align: center;
   font-weight: 600;
+  max-width:40%;
+  margin-bottom: 14px;
 }
 
 .badge-assistido {
-  background-color: #23bf0fcc;
+  background-color: #24bf0f81;
   color: #ffffff;
 }
 
 .badge-assistindo {
-  background-color: #cbdc0bcf;
+  background-color: #cbdc0b7e;
   color: #ffffff;
 }
 
 .badge-quero {
-  background-color: #0970ac;
+  background-color: #0970ac8c;
   color: #ffffff;
 }
