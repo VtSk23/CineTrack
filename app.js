@@ -4,6 +4,9 @@ const form = document.querySelector("#form-filme");
 const gerarId = (lista) => Math.max(0, ...lista.map((f) => f.id)) + 1;
 const abrir = () => modal.hidden = false;
 const fechar = () => modal.hidden = true;
+const CHAVE = "cinetrack:filmes";
+let termoAtual = "";
+let statusAtual = "todos";
 let editandoId = null;
 
 const filmesIniciais = [
@@ -27,7 +30,7 @@ const filmesIniciais = [
     nota: 4, status: "quero", comentario: "" },
 ];
 
-let filmes = [...filmesIniciais]
+let filmes = carregar();
 
 function rotuloStatus(status){
     if (status === "assistido") return "Assistido";
@@ -122,10 +125,49 @@ form.addEventListener("submit", (e) => {
   } else {
     filmes = [...filmes, { id: gerarId(filmes), ...dados }];
   }
-  renderizarCards(filmes);
-  atualizarRodape()
+  salvar();
+  atualizar();
+  atualizarRodape();
   fechar();
 });
+
+
+const salvar = () => localStorage.setItem(CHAVE, JSON.stringify(filmes));
+function carregar() {
+  const txt = localStorage.getItem(CHAVE);
+  return txt ? JSON.parse(txt) : [...filmesIniciais];
+}
+
+function debounce(fn, ms = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), ms);
+  };
+}
+
+const busca = document.querySelector("header input");
+const aoDigitar = (e) => {
+  termoAtual = e.target.value;
+  atualizar();
+};
+
+busca.addEventListener("input", debounce(aoDigitar, 300));
+
+function aplicarFiltros(lista, opcoes) {
+  const termo = opcoes.termo.toLowerCase();
+  return lista
+    .filter((f) =>
+      f.titulo.toLowerCase().includes(termo))
+    .filter((f) => opcoes.status === "todos"
+      || f.status === opcoes.status);
+}
+
+function atualizar() {
+  const visiveis = aplicarFiltros(filmes,
+    { termo: termoAtual, status: statusAtual });
+  renderizarCards(visiveis);
+}
 
 lista.addEventListener("click", (e) => {
   const botao = e.target.closest(".btn-remover");
@@ -134,8 +176,9 @@ lista.addEventListener("click", (e) => {
   const card = botao.closest(".card");
   const id = Number(card.dataset.id);
   filmes = filmes.filter((f) => f.id !== id);
-  renderizarCards(filmes);
-  atualizarRodape()
+  salvar();
+  atualizar();
+  atualizarRodape();
 });
 
 const nav = document.querySelector("nav");
@@ -145,9 +188,8 @@ nav.addEventListener("click", (e) => {
   if (!botao) return;
   nav.querySelector(".ativo").classList.remove("ativo");
   botao.classList.add("ativo");
-  const status = botao.dataset.status;
-  renderizarCards(filmes.filter((f) =>
-    status === "todos" || f.status === status));
+  statusAtual = botao.dataset.status;
+  atualizar();
 });
 
 document.querySelector("header button")
@@ -180,6 +222,7 @@ lista.addEventListener("click", (e) => {
   abrir();
 });
 
+
 function atualizarRodape() {
   const footerSmall = document.querySelector("footer small");
   if (footerSmall) {
@@ -187,5 +230,5 @@ function atualizarRodape() {
   }
 }
 
-renderizarCards(filmes);
+atualizar()
 atualizarRodape()
