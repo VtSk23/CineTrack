@@ -19,6 +19,12 @@ Tecnologias
 
 HTML5, CSS3 e JavaScript
 
+Como executar
+
+1. Clone o repositório: `git clone <url-do-repositorio>`
+2. Abra a pasta `parte1/`
+3. Abra `index.html` no navegador ou use a extensão Live Server do VS Code
+
 Acessibilidade
 
 Lighthouse: 100
