@@ -1,4 +1,4 @@
-export default function Header({ busca, aoBuscar}) {
+export default function Header({ busca, aoBuscar, aoAdicionar }) {
     return (
         <header>
             <h1>CineTrack</h1>
@@ -7,7 +7,7 @@ export default function Header({ busca, aoBuscar}) {
                 value = {busca}
                 onChange = {(e) => aoBuscar(e.target.value)}
             />
-            <button>+ Adicionar</button>
+            <button onClick={aoAdicionar}>+ Adicionar</button>
         </header>
     );
 }

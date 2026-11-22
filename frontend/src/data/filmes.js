@@ -18,3 +18,7 @@ export const filmesIniciais = [
     poster: "../img/cidadedeDeus.jpg",
     nota: 4, status: "quero", comentario: "" },
 ];
+
+export function gerarId(lista) {
+    return Math.max(0, ...lista.map((f) => f.id)) + 1;
+}
