@@ -16,6 +16,9 @@ function App() {
     <>
       <Header busca={busca} aoBuscar={setBusca}/>
       <Filtros ativo={status} aoMudar={setStatus}/>
+      <p className="contador">
+        Exibindo {visiveis.length} de {filmesIniciais.length} filmes
+      </p>
       <main>
         <ListaFilmes filmes={visiveis} />
       </main>
