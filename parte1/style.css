@@ -20,6 +20,9 @@ html {
   --cor-texto: #000000;
   --cor-botao: #50255a;
   --campo-borda: #080808;
+  --campo-fundo: #ffffff;       
+  --campo-texto: #000000;       
+  --cor-superficie: #ffffff;
   --raio: 20px; 
   --espaco: 16px;
 }
@@ -30,6 +33,9 @@ html {
     --cor-fundo: #1a1a1a;
     --cor-texto: #f3f3f3;
     --campo-borda: #6b6b6b;
+    --campo-fundo: #3a3a3a;     
+    --campo-texto: #f3f3f3;    
+    --cor-superficie: #2a2a2a;
   }
 
   #modal select,
@@ -84,7 +90,7 @@ input {
 }
 
 body {
-  font-family: system-ui, sans-serif;
+  font-family: inherit, sans-serif;
   line-height: 1.5;
   color: var(--cor-texto);
   background-color: var(--cor-fundo);
@@ -266,6 +272,64 @@ body {
   }
 }
 
+
+#form-filme {
+  max-width: 480px;
+  margin: 24px auto;
+  padding: 24px;
+  background: var(--cor-superficie);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#form-filme .campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+#form-filme label {
+  font-weight: 700;
+}
+
+#form-filme input,
+#form-filme select,
+#form-filme textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font: inherit;
+  color: var(--campo-texto);
+  background-color: var(--campo-fundo);
+  border: 1px solid var(--campo-borda);
+  border-radius: 8px;
+}
+
+#form-filme textarea {
+  height: auto;
+  min-height: 80px;
+}
+
+#form-filme .acoes-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+#form-filme #btn-salvar {
+  background-color: var(--cor-botao);
+  color: white;
+}
+
+
+#modal #form-filme {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
 #modal {
   position: fixed;
   inset: 0; 
@@ -317,7 +381,7 @@ body {
 
   .acoes-modal {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 12px;
     margin-top: 16px;
   }
@@ -325,6 +389,7 @@ body {
   #btn-cancelar,
   #btn-salvar {
     background-color: var(--cor-botao);
+    color: white;
   }
 }
 
