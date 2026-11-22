@@ -431,3 +431,51 @@ body {
   background-color: #0970ac8c;
   color: #ffffff;
 }
+
+@media print {
+  /* tema claro forçado pelas variáveis (vence o dark mode: vem depois dele) */
+  :root {
+    color-scheme: light;
+    --cor-fundo: white;
+    --cor-texto: black;
+  }
+
+  /* o que não faz sentido no papel */
+  body header input,
+  body header button,
+  body nav,
+  body footer,
+  #modal,
+  body main #lista article.card .acoes {
+    display: none !important;
+  }
+
+  /* cabeçalho e cards legíveis no papel */
+  body header {
+    background-color: transparent;
+    border-bottom: 2px solid black;
+  }
+
+  body header h1 {
+    color: black;
+  }
+
+  body main #lista article.card {
+    background: white;
+    color: black;
+    border: 1px solid #999;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  body main #lista article.card p {
+    color: #333;
+  }
+
+  .badge-assistido,
+  .badge-assistindo,
+  .badge-quero {
+    color: black;
+    border: 1px solid #666;
+  }
+}
