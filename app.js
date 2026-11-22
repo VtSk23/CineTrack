@@ -7,6 +7,7 @@ const fechar = () => modal.hidden = true;
 const CHAVE = "cinetrack:filmes";
 let termoAtual = "";
 let statusAtual = "todos";
+let ordemAtual = "titulo";
 let editandoId = null;
 
 const filmesIniciais = [
@@ -164,9 +165,17 @@ function aplicarFiltros(lista, opcoes) {
 }
 
 function atualizar() {
-  const visiveis = aplicarFiltros(filmes,
-    { termo: termoAtual, status: statusAtual });
-  renderizarCards(visiveis);
+  const visiveis = aplicarFiltros(filmes, { termo: termoAtual, status: statusAtual });
+  renderizarCards(ordenar(visiveis, ordemAtual));
+}
+
+function ordenar(lista, criterio) {
+  const copia = [...lista];
+  if (criterio === "titulo")
+    return copia.sort((a, b) => a.titulo.localeCompare(b.titulo, "pt-BR"));
+  if (criterio === "ano") return copia.sort((a, b) => b.ano - a.ano);
+  if (criterio === "nota") return copia.sort((a, b) => b.nota - a.nota);
+  return copia;
 }
 
 lista.addEventListener("click", (e) => {
@@ -205,6 +214,11 @@ document.addEventListener("keydown", (e) => {
 
 document.querySelector("#modal #btn-cancelar")  
   .addEventListener("click", fechar);
+
+document.querySelector("#ordenar").addEventListener("change", (e) => {
+  ordemAtual = e.target.value;
+  atualizar();
+});
 
 lista.addEventListener("click", (e) => {
   const botao = e.target.closest(".btn-editar");

@@ -89,6 +89,16 @@ input {
   font-size: 18px;
 }
 
+a {
+  text-decoration: none;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 1000;
+}
+
 body {
   font-family: inherit, sans-serif;
   line-height: 1.5;
@@ -267,7 +277,15 @@ body {
     small {
       color: var(--cor-texto);
       font-weight: 600;
-      font-size: 14px;
+      font-size: 16px;
+      padding: 20px;
+    }
+
+    a {
+      color: var(--cor-texto);
+      font-weight: bolder;
+      font-size: 16px;
+      text-decoration: none;
     }
   }
 }
@@ -433,14 +451,14 @@ body {
 }
 
 @media print {
-  /* tema claro forçado pelas variáveis (vence o dark mode: vem depois dele) */
+ 
   :root {
     color-scheme: light;
     --cor-fundo: white;
     --cor-texto: black;
   }
 
-  /* o que não faz sentido no papel */
+ 
   body header input,
   body header button,
   body nav,
@@ -450,7 +468,7 @@ body {
     display: none !important;
   }
 
-  /* cabeçalho e cards legíveis no papel */
+
   body header {
     background-color: transparent;
     border-bottom: 2px solid black;
@@ -477,5 +495,18 @@ body {
   .badge-quero {
     color: black;
     border: 1px solid #666;
+  }
+}
+
+#ordenar {
+  color: var(--campo-texto);
+  font-weight: 700;
+  background-color: var(--campo-fundo);
+  border: 1px solid var(--campo-borda);
+  border-radius: 10px;
+  padding: 6px 10px;
+
+  label {
+    font-weight: 800;
   }
 }
