@@ -1,10 +1,9 @@
 import {  useEffect, useState } from "react";
-import { filmesIniciais, gerarId } from "./data/filmes.js";
 import Header from "./components/Header.jsx";
 import Filtros from "./components/Filtros.jsx";
 import ListaFilmes from "./components/ListaFilmes.jsx";
 import ModalFilme from "./components/ModalFilme.jsx";
-import { listar } from "./api.js";
+import { listar, criar, atualizar, remover } from "./api.js";
 
 const CHAVE = "cinetrack:filtros";
 const STATUS_VALIDOS = ["todos", "assistido", "assistindo", "quero"];
@@ -29,6 +28,7 @@ export default function App() {
   const [busca, setBusca] = useState(() => lerFiltros().busca);
   const [status, setStatus] = useState(() => lerFiltros().status);
   const [editando, setEditando] = useState(null); 
+  const [msgErro, setMsgErro] = useState("");
 
   useEffect(() => {
     listar()
@@ -45,22 +45,26 @@ export default function App() {
     localStorage.setItem(CHAVE, JSON.stringify({ busca, status }));
   }, [busca, status]);
 
-  
-  function adicionar(novo) {
-    setFilmes((ant) => [...ant, { ...novo, id: gerarId(ant) }]);
+
+  async function removerFilme(id) {
+    if (!window.confirm("Remover este filme?")) return;
+    try {
+      await remover(id);
+      setFilmes((fs) => fs.filter((f) => f.id !== id));
+      setMsgErro("");
+    } catch (e) {
+      setMsgErro(e.message);
+    }
   }
 
-  function remover(id) {
-    setFilmes((ant) => ant.filter((f) => f.id !== id));
-  }
-
-  function editar(id, alteracoes) {
-    setFilmes((ant) => ant.map((f) => (f.id === id ? { ...f, ...alteracoes } : f)));
-  }
-
-  function salvar(dados) {
-    if (editando.id) editar(editando.id, dados);
-    else adicionar(dados);
+  async function salvar(dados) {
+    if (dados.id) {
+      const at = await atualizar(dados.id, dados);
+      setFilmes((fs) => fs.map((f) => (f.id === at.id ? at : f)));
+    } else {
+      const novo = await criar(dados);
+      setFilmes((fs) => [...fs, novo]);
+    }
     setEditando(null);
   }
 
@@ -79,7 +83,7 @@ export default function App() {
   } else if (erro) {
     conteudo = <p className="erro">Erro: {erro}</p>;
   } else {
-    conteudo = <ListaFilmes filmes={visiveis} aoEditar={setEditando} aoRemover={pedirRemocao} />;
+    conteudo = <ListaFilmes filmes={visiveis} aoEditar={setEditando} aoRemover={removerFilme} />;
   }
 
   return (
@@ -89,6 +93,7 @@ export default function App() {
       {!carregando && !erro && (
         <p className="contador">Exibindo {visiveis.length} de {filmes.length} filmes</p>
       )}
+      {msgErro && <p className="estado" role="alert">{msgErro}</p>}
       <main>
         {conteudo}
       </main>

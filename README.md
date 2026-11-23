@@ -37,3 +37,16 @@ RA: 138905 Vitor Akihiro Shiki
 Versão
 
 v1.0 — Marco 1
+
+
+## Como rodar o backend
+cd backend
+npm install
+cp .env.example .env 
+npm run seed
+npm run dev 
+
+## Como rodar o frontend
+cd frontend
+npm install
+npm run dev
