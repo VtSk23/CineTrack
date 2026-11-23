@@ -6,12 +6,28 @@ import ListaFilmes from "./components/ListaFilmes.jsx";
 import ModalFilme from "./components/ModalFilme.jsx";
 import { listar } from "./api.js";
 
+const CHAVE = "cinetrack:filtros";
+const STATUS_VALIDOS = ["todos", "assistido", "assistindo", "quero"];
+
+function lerFiltros() {
+  const padrao = { busca: "", status: "todos" };
+  try {
+    const salvo = JSON.parse(localStorage.getItem(CHAVE));
+    return {
+    busca: typeof salvo?.busca === "string" ? salvo.busca : padrao.busca,
+    status: STATUS_VALIDOS.includes(salvo?.status) ? salvo.status : padrao.status,
+    };
+  } catch {
+    return padrao;
+  }
+}
+
 export default function App() {
   const [filmes, setFilmes] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(null);
-  const [status, setStatus] = useState("todos");
-  const [busca, setBusca] = useState("");
+  const [busca, setBusca] = useState(() => lerFiltros().busca);
+  const [status, setStatus] = useState(() => lerFiltros().status);
   const [editando, setEditando] = useState(null); 
 
   useEffect(() => {
@@ -24,6 +40,10 @@ export default function App() {
   useEffect(() => {
     document.title = `CineTrack (${filmes.length})`;
   }, [filmes.length]);
+
+  useEffect(() => {
+    localStorage.setItem(CHAVE, JSON.stringify({ busca, status }));
+  }, [busca, status]);
 
   function adicionar(novo) {
     setFilmes((ant) => [...ant, { ...novo, id: gerarId(ant) }]);
@@ -82,3 +102,4 @@ export default function App() {
     </>
   );
 }
+
