@@ -4,7 +4,11 @@ import Badge from "./Badge";
 export default function CardFilme({ filme , aoEditar, aoRemover}) {
     return (
     <article className="card">
-        <img src={filme.poster} alt="" />
+        {filme.poster ? (
+            <img src={filme.poster} alt={`Pôster de ${filme.titulo}`} />
+        ) : (
+            <div className="sem-poster">Sem pôster</div>
+        )}
         <h2>{filme.titulo}</h2>
         <p>{filme.ano} · {filme.genero}</p>
         <p>Nota: <Estrelas nota={filme.nota}/></p>

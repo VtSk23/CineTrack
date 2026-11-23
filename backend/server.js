@@ -11,6 +11,20 @@ app.use(express.json());
 
 const ARQUIVO = path.join(__dirname, "data", "filmes.json");
 
+const STATUS = ["assistido", "assistindo", "quero"];
+
+function validarFilme(f) {
+  const erros = [];
+  if (typeof f.titulo !== "string" || !f.titulo.trim()) erros.push("título é obrigatório");
+  if (!Number.isInteger(f.ano) || f.ano < 1888 || f.ano > 2030)
+    erros.push("ano deve estar entre 1888 e 2030");
+  if (!Number.isInteger(f.nota) || f.nota < 1 || f.nota > 5)
+    erros.push("nota deve estar entre 1 e 5");
+  if (!STATUS.includes(f.status))
+    erros.push("status deve ser assistido, assistindo ou quero");
+  return erros;
+}
+
 function lerFilmes() {
     return JSON.parse(fs.readFileSync(ARQUIVO, "utf8"));
 }
@@ -24,24 +38,27 @@ function gerarId(lista) {
 }
 
 app.post("/filmes", (req, res) => {
-    const dados = req.body ?? {};
-    if (!dados.titulo || !dados.ano)
-    return res.status(400).json({ erro: "Dados obrigatórios" });
-    const lista = lerFilmes();
-    const novo = { ...dados, id: gerarId(lista) };
-    lista.push(novo);
-    salvarFilmes(lista);
-    res.status(201).json(novo);
+  const dados = req.body ?? {};
+  const erros = validarFilme(dados);
+  if (erros.length) return res.status(400).json({ erros });
+  const lista = lerFilmes();
+  const novo = { ...dados, id: gerarId(lista) };
+  lista.push(novo);
+  salvarFilmes(lista);
+  res.status(201).json(novo);
 });
 
 app.put("/filmes/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const lista = lerFilmes();
-    const i = lista.findIndex((f) => f.id === id);
-    if (i === -1) return res.status(404).json({ erro: "Filme não encontrado" });
-    lista[i] = { ...lista[i], ...(req.body ?? {}), id };
-    salvarFilmes(lista);
-    res.json(lista[i]);
+  const id = Number(req.params.id);
+  const lista = lerFilmes();
+  const i = lista.findIndex((f) => f.id === id);
+  if (i === -1) return res.status(404).json({ erro: "Filme não encontrado" });
+  const atualizado = { ...lista[i], ...(req.body ?? {}), id };
+  const erros = validarFilme(atualizado);       
+  if (erros.length) return res.status(400).json({ erros });
+  lista[i] = atualizado;
+  salvarFilmes(lista);
+  res.json(atualizado);
 });
 
 app.delete("/filmes/:id", (req, res) => {

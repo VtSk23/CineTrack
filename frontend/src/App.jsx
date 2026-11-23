@@ -32,8 +32,11 @@ export default function App() {
 
   useEffect(() => {
     listar()
-      .then((dados) => setFilmes(dados))
-      .catch((erro) => setErro(erro.message))
+      .then((dados) => setFilmes(Array.isArray(dados) ? dados : []))
+      .catch((erro) => {
+        setFilmes([]);
+        setErro(erro.message);
+      })
       .finally(() => setCarregando(false));
   }, []);
 
@@ -44,6 +47,11 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(CHAVE, JSON.stringify({ busca, status }));
   }, [busca, status]);
+
+  useEffect(() => {
+    const total = Array.isArray(filmes) ? filmes.length : 0;
+    document.title = `CineTrack (${total})`;
+  }, [filmes]);
 
 
   async function removerFilme(id) {
@@ -58,14 +66,19 @@ export default function App() {
   }
 
   async function salvar(dados) {
-    if (dados.id) {
-      const at = await atualizar(dados.id, dados);
-      setFilmes((fs) => fs.map((f) => (f.id === at.id ? at : f)));
-    } else {
-      const novo = await criar(dados);
-      setFilmes((fs) => [...fs, novo]);
+    try {
+      if (dados.id) {
+        const at = await atualizar(dados.id, dados);
+        setFilmes((fs) => fs.map((f) => (f.id === at.id ? at : f)));
+      } else {
+        const novo = await criar(dados);
+        setFilmes((fs) => [...fs, novo]);
+      }
+      setEditando(null);
+      setMsgErro("");
+    } catch (e) {
+      setMsgErro(e.message);
     }
-    setEditando(null);
   }
 
   function pedirRemocao(id) {
@@ -73,9 +86,11 @@ export default function App() {
     if (filme && window.confirm(`Remover "${filme.titulo}"?`)) remover(id);
   }
 
-  const visiveis = filmes
+  const listaSegura = Array.isArray(filmes) ? filmes : [];
+  const visiveis = listaSegura
     .filter((f) => status === "todos" || f.status === status)
     .filter((f) => f.titulo.toLowerCase().includes(busca.toLowerCase()));
+
 
   let conteudo;
   if (carregando) {

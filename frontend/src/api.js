@@ -1,23 +1,30 @@
 const BASE = "http://localhost:3000";
 
-async function pedir(caminho, opcoes = {}) {
- const r = await fetch(BASE + caminho, {
- headers: { "Content-Type": "application/json" },
- ...opcoes,
- });
- if (!r.ok) {
- let msg = `Erro ${r.status}`;
- try {
- const corpo = await r.json();
- if (corpo.erros) msg = corpo.erros.join("; ");
- else if (corpo.erro) msg = corpo.erro;
- } catch { }
- throw new Error(msg);
- }
- return r.status === 204 ? null : r.json();
+async function pedir(url, opcoes = {}) {
+  const res = await fetch(url, opcoes);
+  const dados = res.status === 204 ? null : await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    const mensagem = Array.isArray(dados?.erros)
+      ? dados.erros.join(" | ")
+      : dados?.erro || `Erro HTTP ${res.status}`;
+    throw new Error(mensagem);
+  }
+
+  return dados;
 }
 
-export const listar = () => pedir("/filmes");
-export const criar = (f) => pedir("/filmes", { method: "POST", body: JSON.stringify(f) });
-export const atualizar = (id, f) => pedir(`/filmes/${id}`, { method: "PUT", body: JSON.stringify(f) });
-export const remover = (id) => pedir(`/filmes/${id}`, { method: "DELETE" });
+export const listar = () => pedir(`${BASE}/filmes`);
+export const criar = (f) =>
+  pedir(`${BASE}/filmes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(f),
+  });
+export const atualizar = (id, f) =>
+  pedir(`${BASE}/filmes/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(f),
+  });
+export const remover = (id) => pedir(`${BASE}/filmes/${id}`, { method: "DELETE" });
