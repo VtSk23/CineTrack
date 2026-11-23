@@ -5,5 +5,5 @@ const ROTULOS = {
 };
 
 export default function Badge({status}){
-    return <span className={`badge ${status}`}>{ROTULOS[status]}</span>;
+    return <span className={`badge-${status}`}>{ROTULOS[status]}</span>;
 }

@@ -77,9 +77,11 @@ export default function ModalFilme({ filme, aoSalvar, aoFechar }) {
                         {erros.map((m) => <li key={m}>{m}</li>)}
                     </ul>
                     )}
-
-                    <button type="button" onClick={aoFechar}>Cancelar</button>
-                    <button type="submit" disabled={enviando}>Salvar</button>
+                    <div className="acoes-modal">
+                        <button className="btn-cancelar" type="button" onClick={aoFechar}>Cancelar</button>
+                        <button className="btn-salvar" type="submit" disabled={enviando}>Salvar</button>
+                    </div>
+                    
                 </form>
             </div>
         </div>
