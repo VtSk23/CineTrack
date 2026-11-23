@@ -1,0 +1,23 @@
+const fs = require("fs");
+const path = require("path");
+
+const ARQUIVO = path.join(__dirname, "data", "filmes.json");
+
+const filmes = [
+    { id: 1, titulo: "A Origem", ano: 2010, genero: "Ficção científica", nota: 5,
+    status: "assistido", comentario: "Revejo sempre.", poster: "/img/origem.jpg" },
+    { id: 2, titulo: "Parasita", ano: 2019, genero: "Suspense", nota: 4,
+    status: "assistido", comentario: "", poster: "/img/parasita.jpg" },
+    { id: 3, titulo: "O Auto da Compadecida", ano: 2000, genero: "Comédia", nota: 5,
+    status: "assistido", comentario: "Clássico nacional.", poster: "/img/auto.jpg" },
+    { id: 4, titulo: "Duna: Parte Dois", ano: 2024, genero: "Ficção científica", nota: 4,
+    status: "assistindo", comentario: "", poster: "/img/duna.jpg" },
+    { id: 5, titulo: "Interestelar", ano: 2014, genero: "Ficção científica", nota: 5,
+    status: "quero", comentario: "", poster: "/img/interestelar.jpg" },
+    { id: 6, titulo: "Cidade de Deus", ano: 2002, genero: "Drama", nota: 4,
+    status: "quero", comentario: "", poster: "/img/cidadedeDeus.jpg" },
+];
+
+fs.mkdirSync(path.dirname(ARQUIVO), { recursive: true });
+fs.writeFileSync(ARQUIVO, JSON.stringify(filmes, null, 2));
+console.log(`${filmes.length} filmes gravados`);
