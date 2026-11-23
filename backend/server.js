@@ -14,16 +14,28 @@ function lerFilmes() {
 }
 
 app.get("/filmes", (req, res) => {
+    const { q, status } = req.query;
     let lista = lerFilmes();
-    if (req.query.status) lista = lista.filter((f) => f.status === req.query.status);
+    if (q) {
+        const termo = String(q).toLowerCase();
+        lista = lista.filter((f) => f.titulo.toLowerCase().includes(termo));
+    }
+    if (status) lista = lista.filter((f) => f.status === status);
     res.json(lista);
 });
 
-app.get("/filmes/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const filme = lerFilmes().find((f) => f.id === id);
-    if (!filme) return res.status(404).json({ erro: "Filme não encontrado" });
-    res.json(filme);
+app.get("/stats", (req, res) => {
+    const lista = lerFilmes();
+    const porStatus = lista.reduce((acc, f) => {
+        acc[f.status] = (acc[f.status] || 0) + 1;
+        return acc;
+    }, {});
+    const soma = lista.reduce((acc, f) => acc + f.nota, 0);
+    res.json({
+        total: lista.length,
+        porStatus,
+        mediaNotas: lista.length ? Number((soma / lista.length).toFixed(1)) : 0,
+    });
 });
 
 app.listen(3000, () => console.log("API na porta 3000"));
