@@ -45,6 +45,7 @@ export default function App() {
     localStorage.setItem(CHAVE, JSON.stringify({ busca, status }));
   }, [busca, status]);
 
+  
   function adicionar(novo) {
     setFilmes((ant) => [...ant, { ...novo, id: gerarId(ant) }]);
   }
